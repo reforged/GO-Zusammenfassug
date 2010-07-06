@@ -1,0 +1,313 @@
+%Schriftgröße, Layout, Papierformat, Art des Dokumentes
+\documentclass[10pt,oneside,a4paper]{scrreprt}
+
+%Einstellungen der Seitenränder
+\usepackage[left=1cm,right=1cm,top=2cm,bottom=2cm]{geometry}
+
+
+
+\parindent 0em
+\parskip 0.3em
+
+\usepackage{verbatim} 
+\usepackage{amsmath}
+\usepackage{amssymb}
+\newcommand\boxit[1]{%
+  \hspace*{7mm}\frame{\parbox{500pt}{ \vspace*{3mm}\hspace*{2mm} \parbox{480pt}{#1}\vspace*{3mm}}}
+}
+
+\newcommand\boxtwo[1]{%
+  \hspace*{7mm}\frame{\parbox{238pt}{ \vspace*{3mm}\hspace*{2mm} \parbox{230pt}{#1}\vspace*{3mm}}}
+}
+
+
+\begin{document}
+	
+\begin{comment}	  
+	  % TODO:  Take this out
+	  \section*{Uebung 2}
+	    \subsection*{Hesse Diagramm mit Teilbarkeitsrelation}
+	    \begin{enumerate}
+	      \item Primfaktorzerlegung der Zahl
+	      \item Jede kombination der PFZ ist eine Node
+	    \end{enumerate}
+	    \begin{quote}
+	      Teilbarkeitsrelation auf 72  \\
+	      Primfaktorzerlegung := $2^{3}+3^{2}$\\
+	      Anfangen mit 1, dann 2 und 3  \\
+	      nächste Ebene $2*2$, $2*3$ und $3*3$  \\
+	      danach $2*2*2$, $2*2*3$, $2*3*3$  \\
+	      ...
+	    \end{quote}
+	  \end{comment}
+
+	  \section*{Relationen}
+	  \subsubsection*{Funktionen}
+	  \boxit{
+	  injektiv: \hfill $ \forall x,y \in Y : f(x) = f(y) \Rightarrow x = y$ \\
+	  Linkseindeutig: Jedes Element der Zielmenge ist h\"ochstens einmal Funktionswert
+	  }
+    
+    \boxit{
+	  surjectiv: \hfill	    $ \forall y \in Y  ~ \exists x \in X : f(x) = y $\\
+    Rechtstotal: Die gesamte Zielmenge wird von Urbild abgebildet
+    }
+	  
+	  \boxit{
+	  bijektiv: \hfill
+	  $ \forall y \in Y ~ \exists ! x : f(x) = y$\\
+    Jedem Element in der Bildmenge wird genau ein Element in der Zielmenge zugeordnet
+	  }
+	  
+	  \subsubsection*{\"Aquivalenzen}
+	  \boxit{\hfill $R = \{(a,a),(b,b),(b,c),(c,b),(c,c)\}$\hfill \hfill}
+	  
+	  \boxit{
+	  \"Aquivalenzklassen $::= \bar a = \{b ~ |~  b \in A \wedge a \equiv b \}$ \hfill
+    $R: \bar a = \{a\}, \bar b = \{b,c\}, \bar c = \{b,c\}$ 
+	  }
+	  
+	  \boxit{
+	  Quotientenmenge $::=$ die Menge aller \"Aquivalenzklassen \hfill
+    $R: \bar A = \{ \{a\} , \{b,c\} \} $
+    }
+    
+    \boxit{
+	  Vertretersystem $::=$ Ein Mengensystem mit jeweils einem Element aus jeder \"Aquivalenzklasse \hfill $R : \{a,b\} $
+	  }
+	  
+    
+    \subsubsection{Eigenschaften}
+	  NA Script S.133
+	  
+	  \boxit{
+	  reflexiv: 
+	  $\forall x \in M : (x,x) \in R $ \hfill jedes Element steht mit sich selbst in Relation
+	  }
+	  
+	  \boxit{
+	  irrleflexiv: 
+	  $\forall x \in M : (x,x) \notin R $ \hfill kein Element steht mit sich selbst in Relation
+	  }
+	  
+	  \boxit{
+	  symmetrisch: 
+	  $\forall x,y \in M : (x,y) \in R \Rightarrow (y,x) \in R $  \hfill Wenn eine Beziehung existiert, muss sie beidseitig sein
+	  }
+	  
+	  \boxit{
+	  asymmetrisch:
+	  $\forall x,y \in M : (x,y) \in R \Rightarrow (y,x) \notin R $ \hfill Beziehungen sind nur in eine Richtung
+	  }
+	  
+	  \boxit{
+	  antisymmetrisch:
+	  $\forall x,y \in M : (x,y) \in R \wedge (y,x) \in R \Rightarrow x = y$ \hfill \\
+	  Beziehungen sind nur in eine Richtung, oder reflexiv
+	  }
+	  
+	  \boxit{
+	  transitiv: 
+	  $\forall x,y,z \in M : (x,y) \in R \wedge (y,z) \in R \Rightarrow (x,z) \in R$ \hfill \\
+	  Wenn x mit y, und y mit z  in Beziehung steht, dann muss auch x mit z in Beziehung stehen
+	  }
+	  
+	  \boxit{
+	  \"Aquivalenzrelationen sind: reflexiv, transitiv, symmetrisch \\
+	  Halbordnungen sind: ~~~~~~ reflexiv, transitiv, antisymmetrisch 
+	  }
+	  
+	  
+	  \section*{Vollst\"andige Induktion}
+    \boxit{Beweise $f$ f\"ur ein festes $n$, meistens 1\\
+    Beweise $f$ f\"ur $n+1$ mit Hilfe der Induktionsannahme ($f$ ist schon bewiesen f\"ur $n$)
+    }\\
+    \boxit{$ \displaystyle\sum_{i=1}^{n}i = \frac{1}{2}n(n+1) $}
+	  
+	  
+	  
+	  
+	  
+	  \section*{Kombinatorik}
+	  DAS Buch S. 97
+
+	  \boxit{Kombination: \hfill  Ein Wort der L\"ange $k$ \"uber der \underline{$n$} \hfill  ${n \choose k} = \frac{ n! }{ k! (n-k) !} $ }\\	  
+    \boxit{Repetitionen: \hfill	  Kombinationen mit Wiederholung \hfill 	  ${n+k-1 \choose k}$}\\    
+    \boxit{Permutationen: \hfill  Das Wort ent\"alt keinen Buchstaben doppelt \hfill 	  $(n)_1 = n$ und $(n)_n = n!$\\
+          . \hfill $(n)_k = (n-1)_k + (k) \cdot (n-1)_{k-1}$}\\
+    \boxit{Variationen: \hfill   Permutationen mit Wiederholung. \hfill   $n^k$}
+    
+    \boxit{
+      Typ \hfill~~~~~ 2-Typ von 4 \hfill\hfill\\
+      Kombination \hfill 12,13,14,23,24,34\hfill\hfill\\
+      Repetition \hfill 2000,1100,1010,1001,0200,0110, 0110,0101,0020,0011,0002\hfill\hfill\\
+      Permutation \hfill 12,21,13,31,14,41,23,32,24,42,43\hfill\hfill\\
+      Variation \hfill 11,12,21,13,31,14,41,22,23,32,24,42,33,34,43,44\hfill\hfill}
+
+
+    
+    \subsubsection*{Multinomial}
+    \boxit{
+    $\begin{pmatrix}  k  \\ k_1,k_2,...,k_n\end{pmatrix} =  \dfrac{k!}{k_1 ! k_2 ! ... k_n !}$ \hfill \# der $k$-Variationen von Typ $1^{k_1}2^{k_2}...n^{k_n}$\hfill
+    }	  
+	  
+    \subsubsection*{Zykel}
+    DAS Buch S.63
+
+    \boxit{
+    Alle Zykel sind als 2er-Zykel (Transpositionen) darstellbar: \hfill $ (x_{1}x_{2}...x_{n}) = (x_{1}x_{m})..(x_{1}x_{3})(x_{1}x_{2})$ 
+    }
+    
+    \boxit{
+    $r,s$ = \# Transpositionen \hfill   \textbf{signum} eines Tupel: $+1$ falls $r$ gerade, $-1$ sonst. \\
+    $sgn(\pi) = (-1)^{r}$ \hfill $sgn(\phi\pi) = (-1)^{r+s}$ \hfill sowie: $sgn(\pi^{-1}) = sgn(\pi)$
+    }
+    
+    \boxit{
+    Produkte von Zykeln: 12-Reihige Matrix Aufstellen und Relationskomposition erstellen\\
+    $(12)(3) \cdot (1)(23) $\hfill$ \Leftrightarrow $\hfill$ \begin{pmatrix} 1 & 2 & 3 \\ 2 & 1 & 3 \end{pmatrix} \cdot \begin{pmatrix} 1 & 2 & 3 \\ 1 & 3 & 2 \end{pmatrix} $\hfill$ \Leftrightarrow $\hfill$ \begin{pmatrix} 1 & 2 & 3 \\ 3 & 1 & 2 \end{pmatrix} $\hfill$ \Leftrightarrow $\hfill$ (132)$
+    }
+    
+    \boxit{
+    Zykeltypen: $1^{k_1} 2^{k_2} ... n^{k_n}$\\
+	  Grad$ = n = 1\cdot k_1 + 2 \cdot k_2 + ... + n \cdot k_n$ Anzahl Zykel{$= k = k_1 + k_2 + ... + k_n$}\\
+	  Bsp: Permutationen vom Zykeltyp $1^1 2^1 3^0$ sind $(1)(23), (2)(13), (3),(12)$
+    }
+	  
+	  \boxit{
+	  Stirlingzahl 1. Art $s(n,k)$: Anzahl der Perm. von Grad $n$, die aus $k$ disjunkten Zykeln bestehen\\
+	  Stirlingzahl 2. Art $S(n,k)$: Anzahl der $k$-Partitionen von \underline{$n$}
+	  }
+	  
+	  \boxit{Partitionen \hfill DAS Buch S.110\\
+	  Eine Partition der Menge \underline{$n$}, die aus $k$ Bl\"ocken besteht, wird $k$-Partition von $n$ genannt\\	  
+	  Geordnete, $p(n,k)$, mit  Reihenfolge \hfill
+	  Ungeordnete, $P(n,k)$, ohne Reihenfolge
+	  }
+	  
+	  \boxit{
+	  Typenstruktur: 
+	  
+	  $ 1^1 2^1 3^0 $, $1+1+0=k=$ Anzahl der Untermegen, \underline{$3$} = Zahlenraum , Bsp: $\{\{1\},\{2,3\}\}$
+	  }\\
+
+    
+    \hfill
+		\begin{tabular}{|c || c | c | c | c|}
+      \hline
+      $n$ B\"alle  & beliebig  & injektiv & surjektiv & bijektiv\\
+      $r$ F\"acher &           & $n>r : 0$ & $n>r:0 $ & $n \neq r:0$\\
+      \hline
+      gef\"arbt & $r^n$ & $(r)_n$ & $S(n,r)\cdot r! = $ & $n!$\\
+      gef\"arbt & &&$\displaystyle \sum_{i=0}^{k} (-1)^i \begin{pmatrix} k\\i \end{pmatrix} (k-i)^n$&\\
+                & n-Var. von r & n-Perm, von r & & n-Perm von n\\
+      \hline
+      gef\"arbt & $\displaystyle \sum^{r}_{k=1} S(n,k)$ & $S(n,n) = 1$ & $S(n,r) = $ & $S(n,n) = 1$\\
+      einfarbig & &&$\dfrac{1}{k!}\displaystyle \sum_{i=0}^{k} (-1)^i \begin{pmatrix} k\\i \end{pmatrix} (k-i)^n$&\\
+                & k-Part. von n & n-Part. von n & r-Part. von n & n-Part. von n\\
+      \hline
+      einfarbig & $\begin{pmatrix}r+n-1 \\ n \end{pmatrix}$ & $\begin{pmatrix}r\\ n \end{pmatrix}$ & $ p(n,r) = \begin{pmatrix}n-1 \\ r-1 \end{pmatrix}$  & $p(n,n)=1$\\
+      gef\"arbt & n-Rep. von r  & n-Komb. von r  & geord. r-ZP. v. n  & geord. n-ZP. v. n\\
+      \hline
+      einfarbig & $\displaystyle \sum^{r}_{k=1} P(n,k)$ & $P(n,n)$ = 1 & $P(n,r)$ & $P(n,n) = 1$\\
+      einfarbig & ungeord. $k$-ZP von $n$ & ungeord. $n$-ZP von $n$ & ungeord. $r$-ZP von $n$ & ungeord. $n$-ZP von $n$\\
+      \hline
+	  \end{tabular}
+    \hfill \hfill
+		
+	\section*{Teilbarkeitslehre}
+	Rotes Buch S.133
+	
+	\boxit{\hfill	$ a | b \Leftrightarrow \exists c ~ [ac = b] $ \hfill\hfill}
+	
+	\boxtwo{
+	\textbf{Euklidischer Algorithmus}\\
+	$x_0 = q_1 x_1 + x_2$\\
+	$x_1 = q_2 x_2 + x_3$\\
+	$x_2 = q_3 x_3 + x_4$\\
+	$x_3 = q_4 x_4 + x_5$\\
+	... \\
+	bis $x_n = 0$. \\$x_{n-1}$ is dann ggT
+  }\boxtwo{
+	Beispiel:\\
+	$a=285$ und $b=252$\\
+	$286 = 1 \cdot 252 + 133$\\
+	$252 = 1 \cdot 133 + 119$\\
+	$133 = 1 \cdot 119 + 14$\\
+	$119 = 8 \cdot 14 + 7$\\
+	$14 = 2 \cdot 7 + 0$\\
+	$(285,252) = 7$
+	}
+	
+	\boxtwo{
+	\textbf{Erweiterter Euk.Alg. (Bezout)}\\
+  ggT als lineare Kombination von $x_0$ und $x_1$\\
+
+	Umstellen der Gleichungen zu:\\ $x_{m} = x_{m-2} - (q_{m-1} x_{m-1})$ \\
+	Bei vorletzer Gleichung anfangen \\
+	$x_n$ ersetzen bis bei $x_1$ angekommen
+	}\boxtwo{
+	Beispiel:\\
+	$7 = 119 - 8 \cdot 14$\\
+	$7 = 119 - 8 \cdot (133 - 1 \cdot 119) = (-8) \cdot 113 + 9 \cdot 119$\\
+	$7 = (-8) \cdot 133 + 9 \cdot (252 - 1 \cdot 133) = 9 \cdot 252 + (-17) \cdot 133$\\
+	$7 = 9 \cdot 252 + (-17) \cdot (385 - 1 \cdot 252)$\\
+	$7 = (-17) \cdot 385 + 26 \cdot 252$
+  }
+
+	\section*{Restklassenringe}
+	Rotes Buch S.144 u. S.151
+	
+  \boxit{
+  Potenzieren:\\
+  Exponent $m$ bin\"ar darstellen: \hfill $m = m_k 2^k + ... + m_1 2 + m_0$\\
+  Horner Schema: \hfill $m = (... (m_k 2 + m_{k-1})2 + ... ~ m_1)2+m_0$\\
+  Potenzieren: \hfill
+  $a^m = (...(a^{m_k})^2a^{m_{k-1}})^2 a^{m_{k-2}} )^2 ... a^{m_1})^2a^{m_0}$
+  }\\
+  \boxit{
+  Bsp: \hfill
+  $25 = (((1 \cdot 2 + 1 ) \cdot 2 + 0) \cdot 2 + 0) \cdot 2 + 1$ \hfill $\Rightarrow$ \hfill  $a^25 = (((a^2 a)^2)^2)^2 a$
+  }
+  
+  \boxit{
+  Fals $\mathbb{Z}_p$ ist prim \\
+	$m = m_k p^k + ... + m_1 p + m_0 = (...(m_k p + m_{k-1})p + ... + m_1 p) + m_0$\\
+	$a^m = (...(a^{m_k})^p a^{a_{k-1}})^p a^{m_{k-2}})^p ... a^{m_1})^p a^{m_0} = $\hfill$ a^{m_k+m_{k-1}+...+ m_0}$
+  }
+  
+
+	\subsection*{Einheiten und Nullteiler in Restklassenringen}
+	Rotes Buch S.148
+	
+	\boxit{	Einheit (invertierbar) \hfill $\exists b [ab = 1] , b ::= a^{-1}$\\
+	Nullteiler (0 ist nie Nullteiler) \hfill $\exists b 	[b \neq 0 \wedge 	ab = 0]$ }
+
+	\boxit{ Jedes Element ist entweder Nullteiler oder Einheit}
+	
+  \boxit{Bestimmen des Inversen von $a$ in $\mathbb{Z}_n$:\\
+  $(a,n)$ , Bezout , Pr\"afix vor a in der Linearen Kombination}
+  
+  \boxit{
+  Eulersche $\Phi$-Funktion: \\
+  $\Phi (n) = $Anzahl der Einheiten in $\mathbb{Z}_n$\\
+  $\Phi (n) = n(1-\frac{1}{p_1}) ... (1-\frac{1}{p_r}) , ~~~~~~~~ p_{\{1..r\}}$ ist Primfaktorzerlegung
+  }
+
+  \section*{Polynome}
+  Rotes Buch S.164
+  
+  \boxit{
+  Grad eines Polynoms: \\
+  Nullpolynom hat keinen Grad \hfill   Konstante Polynome Grad 1 \hfill  Lineare Polynome Grad 2, ...}
+  
+  \boxit{
+  Irreduzible Polynome:\\
+  Ein Polynom $f$ ist irreduzibel wenn $\neg (\exists g,h [f = gh])$\\
+  Irreduzible Polynome zu $\mathbb{R}[x] \Leftrightarrow $ Primzahlen zu $\mathbb{Z}$
+  }
+  
+  \boxit{
+  ggT, Bezout, Einheiten und Nullteiler analog zu $\mathbb{Z}_n$
+  }
+\end{document}
