@@ -34,9 +34,23 @@
     
     Graph: $G = (V,E)$\\
     Baum: $|E| = |V| - 1$\\
+    Spannbaum von G: Teilgraph von G und Baum der alle Knoten von G ent\"allt, not unique.
     Bipartit: $G = (V_1 \cup V_2, E)$,
     G ist bipartit $\Leftrightarrow$ G enth\"allt keinen Kreis gerader l\"ange\\
     
+    
+    Flussnetze:\\
+    $N=(D,\kappa,s,q)$ , D Digraph, $\kappa: E \rightarrow \mathbb{R}_0^{+}$ Kostenfunktion\\
+    
+    Schnitt eines Flussnetzes:\\
+    Teilmenge S, die die Quelle aber nicht die Senke ent\"allt.\\
+    Kapazit\"at eines Schnittes: $\kappa(S)$ = Kapazit\"at der Endknoten des Schnittes.
+    Minimaler Schnitt S = $\forall S'$ $\kappa(S) \leq \kappa(S')$\\
+    maximaler Fluss == min Schnitt
+    
+    
+    
+    %Paarung, Knotenueberdeckung
     \subsection*{Planarit\"at}
     f\"ur ebene Darstellungen gelten: $n-m+f=2$ ,n=Knoten, m=Kanten, f=Fl\"achen\\
     if $n \geq 3$ $3n-6$ Kanten h\"ochsten\\
@@ -44,15 +58,20 @@
     ein Graph ist planar $\Leftrightarrow$ kein subgraph von G ist hom\"oomorph zu $k_5$, $k_{3,3}$
     
     \subsection*{Datenstrukturen}
-    Adjazenzmatrix, $n \cdot n$, immer symetrisch\\
-    $a_{ij} = 1$ falls $v_iv_j \in E$, $0$ sonst\\
-    Inzidenzmatrix, $n\cdot m$, $e_{ij} = 1 $ wenn $v_i$ mit $e_j$ inzidiert, $0$ sonst\\
-    spaltensume immer $2$, reihensumme = grad des Knoten\\
+    Adjazenzmatrix\\
+    \boxit{ $n \cdot n$, immer symetrisch\\
+    $a_{ij} = 1$ falls $v_iv_j \in E$, $0$ sonst
+    }
+    
+    Inzidenzmatrix\\
+    \boxit{ $n\cdot m$, $e_{ij} = 1 $ wenn $v_i$ mit $e_j$ inzidiert, $0$ sonst\\
+    Spaltensume immer $2$, Reihensumme = Grad des Knoten
+    }
     
     \subsection*{Netzwerke}
     Floyd-Warshal (S.288)\\
     \boxit{
-    Abstand f\"ur alle Knoten $O(|V|^3)$\\
+    K\"urzeste Abst\"ande f\"ur alle Knoten $O(|V|^3)$\\
     siehe auch Dijkstra (S.289)\\
 
     for k=1 to n do: $ d(u,w) = min(d^{k-1}(u,w), d^{k-1}(u,v_k) + d^{k-1}(v_k,w))$\\
@@ -67,7 +86,11 @@
     
     Ford-Fulkerson (S.293)\\
     \boxit{
-      
+      bestimmet maximalen Fluss in N\\
+      erst alle Knoten markieren, dann Fluss vergr\"ossern und erneut markieren.
+      %TODO: negative kanten...
     }
+    
+    %TODO: Saetze von Menger, Koenig-Egevary und Hall??
     
 \end{document}
