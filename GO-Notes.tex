@@ -4,16 +4,13 @@
     %%                 Graphentheorie und Optimierung                  %%    
     %%                                                                 %%    
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{comment}
-  
-  Markup    : LaTex
-  Maintainer: jan.winkelmann@tuhh.de
-  URL       : http://github.com/reforged/GO-Zusammenfassug
-  Date      : 2010/7/8
-  TODO      : Der gesamte Optimierungsteil
-              Maximale Paarung und Kontendeckungsdinger
-  
-\end{comment}
+
+%  Markup    : LaTex
+%  Maintainer: jan.winkelmann@tuhh.de
+%  URL       : http://github.com/reforged/GO-Zusammenfassug
+%  Date      : 2010/8/26
+%  TODO      : Der gesamte Optimierungsteil
+
 %Schriftgröße, Layout, Papierformat, Art des Dokumentes
 \documentclass[10pt,oneside,a4paper]{scrreprt}
 
@@ -47,66 +44,68 @@
     % }
     
     \section*{Graphentheorie}
-    
+
     Graph: $G = (V,E)$\\
     Baum: $|E| = |V| - 1$\\
-    Spannbaum von G: Teilgraph von G und Baum der alle Knoten von G ent\"allt, not unique.
+    Spannbaum von G: Teilgraph von G und Baum der alle Knoten von G ent\"allt, not unique. \\
     Bipartit: $G = (V_1 \cup V_2, E)$,
     G ist bipartit $\Leftrightarrow$ G enth\"allt keinen Kreis gerader l\"ange\\
-    
-    
+    Paarung $P$ von $G$: $P$ hat keine gemeinsamen Endpunkte. --- $P \subset E$ es gibt nur Paare\\
+    Knoten\"uberdeckung $U$ von $G$: $\forall$ Kanten $uv$ gilt $u \in U$ OR $v \in U$. --- $U \subset V$ s.d. jede Kante hat ein Ende in $U$\\
+    K\"onig-Egervary: $G$ bipartit $\Rightarrow$ $|$maximale Paarung$| == |$minimale Knotenueberdeckung$|$ \\
+
     Flussnetze:\\
     $N=(D,\kappa,s,q)$ , D Digraph, $\kappa: E \rightarrow \mathbb{R}_0^{+}$ Kostenfunktion\\
-    
+
     Schnitt eines Flussnetzes:\\
     Teilmenge S, die die Quelle aber nicht die Senke ent\"allt.\\
     Kapazit\"at eines Schnittes: $\kappa(S)$ = Kapazit\"at der Endknoten des Schnittes.
     Minimaler Schnitt S = $\forall S'$ $\kappa(S) \leq \kappa(S')$\\
     maximaler Fluss == min Schnitt
-    
-    
-    
-    %Paarung, Knotenueberdeckung
+
     \subsection*{Planarit\"at}
     f\"ur ebene Darstellungen gelten: $n-m+f=2$ ,n=Knoten, m=Kanten, f=Fl\"achen\\
     if $n \geq 3$ $3n-6$ Kanten h\"ochsten\\
     if $n \geq 3$ hat h\"ochstens $g \geq 3$, g = Umfang des Graphen???? $max\{g(n-2)/(g-2)m n-1\} Kanten$ \\
     ein Graph ist planar $\Leftrightarrow$ kein subgraph von G ist hom\"oomorph zu $k_5$, $k_{3,3}$
-    
+
     \subsection*{Datenstrukturen}
     Adjazenzmatrix\\
     \boxit{ $n \cdot n$, immer symetrisch\\
     $a_{ij} = 1$ falls $v_iv_j \in E$, $0$ sonst
     }
-    
+
     Inzidenzmatrix\\
     \boxit{ $n\cdot m$, $e_{ij} = 1 $ wenn $v_i$ mit $e_j$ inzidiert, $0$ sonst\\
     Spaltensume immer $2$, Reihensumme = Grad des Knoten
     }
-    
+
     \subsection*{Netzwerke}
     Floyd-Warshal (S.288)\\
     \boxit{
-    K\"urzeste Abst\"ande f\"ur alle Knoten $O(|V|^3)$\\
-    siehe auch Dijkstra (S.289)\\
+    K\"urzeste Abst\"ande f\"ur alle Knoten $O(|V|^3)$ \\
 
     for k=1 to n do: $ d(u,w) = min(d^{k-1}(u,w), d^{k-1}(u,v_k) + d^{k-1}(v_k,w))$\\
     Mit jeder Iteration gucken ob es einen k\"urzeren Weg \"uber den Knoten $v_k$ gibt
     }
     
-    
+    Dijkstra (S.289)\\
+    \boxit{
+    K\"urzeste Wege f\"ur einzelnen Knoten $O(|V|^2) oder O(|E| + |V| log |V|)$ \\
+    Nachbarkanten untersuchen nach k\"urzeren Wegen
+    }
+
     Kurskal (S.291)\\
     \boxit{
-    min. Spannb\"aume
+    min. Spannb\"aume \\
+    Durchlaufe Kanten nach wachsendem Gewicht, füge hinzu, wenn Komponente noch nicht im Spannbaum
     }
-    
+
     Ford-Fulkerson (S.293)\\
     \boxit{
       bestimmet maximalen Fluss in N\\
       erst alle Knoten markieren, dann Fluss vergr\"ossern und erneut markieren.
       %TODO: negative kanten...
     }
-    
-    %TODO: Saetze von Menger, Koenig-Egevary und Hall??
-    
+
 \end{document}
