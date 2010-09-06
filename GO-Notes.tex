@@ -16,7 +16,8 @@
 
 %Einstellungen der Seitenränder
 \usepackage[left=1cm,right=1cm,top=2cm,bottom=2cm]{geometry}
-
+\usepackage{listings}
+\usepackage{color}
 
 
 \parindent 0em
@@ -79,6 +80,12 @@
     \boxit{ $n\cdot m$, $e_{ij} = 1 $ wenn $v_i$ mit $e_j$ inzidiert, $0$ sonst\\
     Spaltensume immer $2$, Reihensumme = Grad des Knoten
     }
+    
+    Inzidenzliste\\
+    \boxit{ Eine Liste pro Knoten, die alle Nachbarknoten enth\"allt.\\
+    $L_{v_n} = \{x | \exists_{e \in E}: e = (v_n,x) \}$
+    
+    }
 
     \subsection*{Netzwerke}
     Floyd-Warshal (S.288)\\
@@ -98,7 +105,7 @@
     Kurskal (S.291)\\
     \boxit{
     min. Spannb\"aume \\
-    Durchlaufe Kanten nach wachsendem Gewicht, füge hinzu, wenn Komponente noch nicht im Spannbaum
+    Durchlaufe Kanten nach wachsendem Gewicht, f\"uge hinzu, wenn Komponente noch nicht im Spannbaum
     }
 
     Ford-Fulkerson (S.293)\\
@@ -107,5 +114,86 @@
       erst alle Knoten markieren, dann Fluss vergr\"ossern und erneut markieren.
       %TODO: negative kanten...
     }
+  \section*{Optimierung}
+  % TODO: rezepte, boilerplate
+  %       N(x), C()?
+  Entscheidungsprobleme: NP--Vollst\"andig\\
+  Opimierungsprobleme: NP--Hart\\
+  Eine Maximierung von $f$ entspricht einer Minimierung von $-f$ [$max\{ f(x) | x \in X \} == -min\{ -f(x) | x \in X\}$]\\
+  \subsection*{Backtracking -- Kombinatorische Optimierung (S. 307)}
+  Exhaustives durchsuchen des gesamten Suchraumes.\\
+  NUR INTERFACES SPEZIFIZIEREN??  \\
+  Abschneiden von Teilb\"aumen durch Bonding--Funktionen: (S. 310)\\
+  $x = (x_1, ..., x_k)$ Teill\"osung und $P(x)$ der zugeh\"orige Maximalwert aller L\"osungen von $x$ \\
+  Bonding Funktion $B(x)$ s.d. $\forall x B(x) \ge P(x)$. So kann abgeschnitten werden wenn $B(x) \le$ dem aktuellen H\"ochstwert
+  
+  \subsection*{Heuristiken (S. 313)}
+  Ordnet jeder L\"osung eine Nachbarschaft von anderen L\"osungen zu.\\
+  Nachbarschaftsfunktion $N(x)$
+  
+  \subsubsection*{Bergauf--Methode}
+  Als Nachbarschaft von $x$ wird ein Wert $y$ mit $f(y) > f(x)$ gesucht.\\
+  Sobald $f(y)$ nicht mehr gr\"osser wird aufgeh\"ort zu suchen.
+  
+  \subsubsection*{Simulated Annealing (S. 316)}
+  Falls $f(y) < f(x)$ benutzt $random \in [0,1] < e^{\frac{f(y)-f(x)}{T}}$ um zu entscheiden ob $x$ (doch) durch $y$ ersetzt wird.\\
+  Abk\"uhlungsplan $T$. $T_0$ wird hoch gehw\"ahlt und nach jeder Iteration um einen Prozensatz gesenkt bis Endtemperatur $T_f$ erreicht ist\\
+  Dies soll das verlassen von lokalen Optima am Anfang des Prozesses erm\"oglichen.
+  
+  \subsubsection*{Genetische Algorithmen}
+  Initialisiert Population P mit N Individuen\\
+  Iteriere: Selektion, Mutation, Kreuzung\\
+  
+  Selektion: W\"ahle die besten N Individuen aus P\\
+  Mutation: Ersezte Individuen durch Benachbarte\\
+  Kreuzung: Kreuze Paare aus der Population\\
+  \subsection*{Lineare Programmierung}
+  
+  \section*{Boilerplate}
 
+  \boxtwo{
+  \hspace*{\fill} \textbf{Bergauf}\hspace*{\fill} \\
+  
+  \textbf{w\"ahle} zul\"assige L\"osung $x \in X$ //Startpunkt\\
+  $x^* \gets x$ //beste L\"osung\\
+  $searching \gets$ \textbf{true}\\
+  \textbf{while} ($searching$) \{\\
+  \hspace*{5mm} $y \gets H(x)$\\
+  \hspace*{5mm} \textbf{if} ($y == fail$)\\
+  \hspace*{10mm}  $searching \gets$ \textbf{false}\\
+  \hspace*{5mm} \textbf{else} \{ \\
+  \hspace*{10mm} $x \gets y$\\
+  \hspace*{10mm} \textbf{if} ($f(x) > f(x^*)$)\\
+  \hspace*{15mm} $x^* \gets x$\\
+  \hspace*{5mm} \}\\
+  \}\\
+  }
+  \boxtwo{
+  \hspace*{\fill} \textbf{Simulated Annealing}\hspace*{\fill} \\
+
+  T $\gets$ T$_0$\\
+  \textbf{w\"ahle} zul\"assige L\"osung $x \in X$ //Startpunkt\\
+  $x^* \gets x$ //beste L\"osung\\
+  \textbf{while} (T $\ge$ T$_f$)\{\\
+  \hspace*{5mm} $y \gets H(x)$\\
+  \hspace*{5mm} \textbf{if} ($y == fail$)\\
+  \hspace*{10mm}  return $x^*$\\
+  \hspace*{5mm} \textbf{if} ($f(y) > f(x)$) \{\\
+  \hspace*{10mm} $x \gets y$ //Aufw\"artsbewegung\\
+  \hspace*{10mm} \textbf{if} ($f(x) > f(x^*)$)\\
+  \hspace*{15mm} $x^* \gets x$\\
+  \hspace*{5mm} \}\\
+  \hspace*{5mm} \textbf{else} \{\\
+  \hspace*{10mm} $r \gets random(0,1)$ //Abw\"artsbewegung\\
+  \hspace*{10mm} \textbf{if} ($r < e^{\frac{f(y)-f(x)}{T}} $)\\
+  \hspace*{15mm} $x \gets y$\\
+  \hspace*{10mm} T $\gets \alpha \cdot T$ // $\alpha = .99$\\
+  \hspace*{5mm}\}\\
+  \}\\
+  }\\
+  
+  \boxtwo{
+  \hspace*{\fill} \textbf{Genetische Algorithmen}\hspace*{\fill} \\
+
+  }
 \end{document}
