@@ -8,21 +8,21 @@
 %  Markup    : LaTex
 %  Maintainer: jan.winkelmann@tuhh.de
 %  URL       : http://github.com/reforged/GO-Zusammenfassug
-%  Date      : 2010/8/26
-%  TODO      : Der gesamte Optimierungsteil
+%  Date      : 2010/09/07
 
 %Schriftgröße, Layout, Papierformat, Art des Dokumentes
 \documentclass[10pt,oneside,a4paper]{scrreprt}
 
 %Einstellungen der Seitenränder
-\usepackage[left=1cm,right=1cm,top=2cm,bottom=2cm]{geometry}
+\usepackage[left=1cm,right=1cm,top=1cm,bottom=2cm]{geometry}
 \usepackage{listings}
 \usepackage{color}
-
+\usepackage[compact]{titlesec}
 
 \parindent 0em
 \parskip 0.3em
-
+\titlespacing{\subsection}{0pt}{*2}{*0}
+\titlespacing{\subsubsection}{0pt}{*2}{*0}
 \usepackage{verbatim} 
 \usepackage{listings}
 \usepackage{amsmath}
@@ -46,22 +46,18 @@
     
     \section*{Graphentheorie}
 
-    Graph: $G = (V,E)$\\
-    Baum: $|E| = |V| - 1$\\
-    Spannbaum von G: Teilgraph von G und Baum der alle Knoten von G ent\"allt, not unique. \\
-    Bipartit: $G = (V_1 \cup V_2, E)$,
+    Graph: $G = (V,E)$ \hspace{5mm} Baum: $|E| = |V| - 1$\\
+    \textbf{Spannbaum} von G: Teilgraph von G und Baum der alle Knoten von G ent\"allt, not unique. \\
+    \textbf{Bipartit}: $G = (V_1 \cup V_2, E)$,
     G ist bipartit $\Leftrightarrow$ G enth\"allt keinen Kreis gerader l\"ange\\
-    Paarung $P$ von $G$: $P$ hat keine gemeinsamen Endpunkte. --- $P \subset E$ es gibt nur Paare\\
-    Knoten\"uberdeckung $U$ von $G$: $\forall$ Kanten $uv$ gilt $u \in U$ OR $v \in U$. --- $U \subset V$ s.d. jede Kante hat ein Ende in $U$\\
-    K\"onig-Egervary: $G$ bipartit $\Rightarrow$ $|$maximale Paarung$| == |$minimale Knotenueberdeckung$|$ \\
-
-    Flussnetze:\\
-    $N=(D,\kappa,s,q)$ , D Digraph, $\kappa: E \rightarrow \mathbb{R}_0^{+}$ Kostenfunktion\\
-
-    Schnitt eines Flussnetzes:\\
-    Teilmenge S, die die Quelle aber nicht die Senke ent\"allt.\\
-    Kapazit\"at eines Schnittes: $\kappa(S)$ = Kapazit\"at der Endknoten des Schnittes.
-    Minimaler Schnitt S = $\forall S'$ $\kappa(S) \leq \kappa(S')$\\
+    \textbf{Isomorph}: G ist isomorph $\rightarrow$ Gradfolge und $|V|$ sowie $|E|$ sind identisch\\
+    \textbf{Paarung} $P$ von $G$: $P$ hat keine gemeinsamen Endpunkte. --- $P \subset E$ es gibt nur Paare\\
+    \textbf{Knoten\"uberdeckung} $U$ von $G$: $\forall$ Kanten $uv$ gilt $u \in U$ OR $v \in U$. --- $U \subset V$ s.d. jede Kante hat ein Ende in $U$\\
+    \textbf{K\"onig-Egervary}: $G$ bipartit $\Rightarrow$ $|$maximale Paarung$| == |$minimale Knotenueberdeckung$|$ \\
+    \textbf{Flussnetze}: $N=(D,\kappa,s,q)$ , D Digraph, $\kappa: E \rightarrow \mathbb{R}_0^{+}$ Kostenfunktion\\
+    \textbf{Schnitt eines Flussnetzes}: Teilmenge S, die die Quelle aber nicht die Senke ent\"allt.\\
+    \textbf{Kapazit\"at} eines Schnittes: $\kappa(S)$ = Kapazit\"at der Endknoten des Schnittes.
+    \textbf{Minimaler Schnitt} S = $\forall S'$ $\kappa(S) \leq \kappa(S')$\\
     maximaler Fluss == min Schnitt
 
     \subsection*{Planarit\"at}
@@ -71,21 +67,21 @@
     ein Graph ist planar $\Leftrightarrow$ kein subgraph von G ist hom\"oomorph zu $k_5$, $k_{3,3}$
 
     \subsection*{Datenstrukturen}
-    Adjazenzmatrix\\
-    \boxit{ $n \cdot n$, immer symetrisch\\
+    \boxtwo{
+    \textbf{Adjazenzmatrix}\\ 
+    $n \cdot n$, immer symetrisch\\
     $a_{ij} = 1$ falls $v_iv_j \in E$, $0$ sonst
     }
-
-    Inzidenzmatrix\\
-    \boxit{ $n\cdot m$, $e_{ij} = 1 $ wenn $v_i$ mit $e_j$ inzidiert, $0$ sonst\\
-    Spaltensume immer $2$, Reihensumme = Grad des Knoten
+    \boxtwo{
+    \textbf{Inzidenzmatrix}\\ 
+    $n\cdot m$, $e_{ij} = 1 $ wenn $v_i$ mit $e_j$ inzidiert, $0$ sonst\\
+    Spaltensumme= $2$, Reihensumme = Grad des Knoten
     }
     
-    Inzidenzliste\\
-    \boxit{ Eine Liste pro Knoten, die alle Nachbarknoten enth\"allt.\\
-    $L_{v_n} = \{x | \exists_{e \in E}: e = (v_n,x) \}$
-    
-    }
+    % Inzidenzliste\\
+    % \boxit{ Eine Liste pro Knoten, die alle Nachbarknoten enth\"allt.\\
+    % $L_{v_n} = \{x | \exists_{e \in E}: e = (v_n,x) \}$
+    % }
 
     \subsection*{Netzwerke}
     Floyd-Warshal (S.288)\\
@@ -122,7 +118,6 @@
   Eine Maximierung von $f$ entspricht einer Minimierung von $-f$ [$max\{ f(x) | x \in X \} == -min\{ -f(x) | x \in X\}$]\\
   \subsection*{Backtracking -- Kombinatorische Optimierung (S. 307)}
   Exhaustives durchsuchen des gesamten Suchraumes.\\
-  NUR INTERFACES SPEZIFIZIEREN??  \\
   Abschneiden von Teilb\"aumen durch Bonding--Funktionen: (S. 310)\\
   $x = (x_1, ..., x_k)$ Teill\"osung und $P(x)$ der zugeh\"orige Maximalwert aller L\"osungen von $x$ \\
   Bonding Funktion $B(x)$ s.d. $\forall x B(x) \ge P(x)$. So kann abgeschnitten werden wenn $B(x) \le$ dem aktuellen H\"ochstwert
@@ -147,8 +142,34 @@
   Selektion: W\"ahle die besten N Individuen aus P\\
   Mutation: Ersezte Individuen durch Benachbarte\\
   Kreuzung: Kreuze Paare aus der Population\\
-  \subsection*{Lineare Programmierung}
+  \subsection*{Lineare Programmierung S. 327}
+  \subsubsection*{LP und Dualit\"at S.328}
+  \boxtwo{
+  (primales) LP\\
+  \hspace*{6mm} $max$ $ c^T x$\\
+  s.d. $Ax \le b$\\
+  \hspace*{6mm} $x \ge$ 0
+  }
+  \boxtwo{
+  duales LP\\
+  \hspace*{6mm} $min$ $ b^T y$\\
+  s.d. $A^T y \ge c$\\
+  \hspace*{6mm} $y \ge$ 0
+  }
+  % \subsubsection*{Ecken S.333}
+  % $A^{m,n}$ ${max(m,n) \choose min(m,n) }$ Ecken
+  \subsubsection*{ILP S.336}
+  Total Unimoular, wenn die Determinanten aller quadratischen Untermatrizen +1, 0 oder -1 ist.\\
   
+  Inzidenzmatrix von G ist total Unimoular wenn G bipartit.\\
+  Inzidenzmatrix von G ist total Unimoular wenn G digraph.\\
+  
+  Wenn $A$ total Unimoular und $b \in Z^m$ , dann sind alle Ecken ganzzahlig.
+  
+  \subsubsection*{Graphische L\"osungen}
+  $\alpha x_1 + \beta x+2 = c$\\
+  intersection form: $\frac{x}{a} + \frac{y}{b} = 1$ \\
+  $m = - \frac{\alpha}{\beta}$; $b = \frac{c}{\beta}$\\
   \section*{Boilerplate}
 
   \boxtwo{
@@ -167,6 +188,8 @@
   \hspace*{15mm} $x^* \gets x$\\
   \hspace*{5mm} \}\\
   \}\\
+  
+  w\"ahle $H(x)$ Problemspezifisch
   }
   \boxtwo{
   \hspace*{\fill} \textbf{Simulated Annealing}\hspace*{\fill} \\
@@ -182,18 +205,44 @@
   \hspace*{10mm} $x \gets y$ //Aufw\"artsbewegung\\
   \hspace*{10mm} \textbf{if} ($f(x) > f(x^*)$)\\
   \hspace*{15mm} $x^* \gets x$\\
-  \hspace*{5mm} \}\\
-  \hspace*{5mm} \textbf{else} \{\\
+  \hspace*{5mm} \} \textbf{else} \{\\
   \hspace*{10mm} $r \gets random(0,1)$ //Abw\"artsbewegung\\
   \hspace*{10mm} \textbf{if} ($r < e^{\frac{f(y)-f(x)}{T}} $)\\
   \hspace*{15mm} $x \gets y$\\
   \hspace*{10mm} T $\gets \alpha \cdot T$ // $\alpha = .99$\\
   \hspace*{5mm}\}\\
-  \}\\
+  \}
   }\\
   
   \boxtwo{
-  \hspace*{\fill} \textbf{Genetische Algorithmen}\hspace*{\fill} \\
+  \hspace*{\fill} \textbf{Backtracking}\hspace*{\fill} \\
 
-  }
+  \textbf{function\_name}$(...,k)$ \{\\
+  \hspace*{5mm} \textbf{if} $(k=0)$ \\
+  \hspace*{10mm} setup...\\
+  \hspace*{5mm} \textbf{if} $(k=n)$ \{\\
+  \hspace*{10mm} \textbf{if} $($ \textbf{check\_valid}$(x_1, ..., x_k)$ \textbf{and} $ k>optSize)$\\
+  \hspace*{15mm} $optSize \leftarrow k$\\
+  \hspace*{5mm} \} \textbf{else} \{\\
+  \hspace*{10mm} $x_k \leftarrow 0$\\
+  \hspace*{10mm} \textbf{function\_name} $(x_1, ..., x_k, k+1)$\\
+  \hspace*{10mm} $x_k \leftarrow 1$\\
+  \hspace*{10mm} [\textbf{if} $($\textbf{bonding} $(x_1, ..., x_k) )$]\\
+  \hspace*{10mm} \textbf{function\_name} $(x_1, ..., x_k, k+1)$\\
+  \hspace*{5mm} \}\\
+  \}\\
+  
+  \textbf{main()} \{\\
+  \hspace*{5mm} $optSize \leftarrow 0$\\
+  \hspace*{5mm} $n \leftarrow $?\\
+  \hspace*{5mm} \textbf{function\_name}$(0)$\\
+  \hspace*{5mm} \textbf{print} problem\\
+  \}\\
+  Backtracking variations:\\
+  use sets instead of bitvector\\
+  bonding function also applies to case $x_k = 0$\\
+  }\\
+
+  % Genetische Algos
+  % Backtracking
 \end{document}
