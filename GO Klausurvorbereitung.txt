@@ -1,0 +1,17 @@
+GO - Klausurvorbereitung
+
+Sure to come up:
+  * Backtracking
+  * Simulated annealing
+  * Linear Programming
+  
+Might come up:
+  * Max. Fluss
+  * kuerzester Weg
+  * Mengen/Kantenueberdeckung
+  
+Unlikely to come up:
+  * vollst. Paarung
+  * ILP?
+  * Genetic Algorithms
+  * Convexity
